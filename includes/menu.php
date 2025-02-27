@@ -8,7 +8,7 @@
                                 Dashboard
                             </a>
                             <a class="nav-link" href="aboutus.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-a"></i></i></div>
                                 About Us
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
