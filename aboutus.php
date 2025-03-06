@@ -100,7 +100,7 @@
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <div class="p-3">
                                         <h3>Data Entry</h3>
-                                        <form action="includes/process_about.php" method="GET">
+                                        <form action="includes/process_about.php" method="POST">
                                             <div class="mb-3">
                                                 <label for="txtTitle" class="form-label">Title:</label>
                                                 <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Enter title" required>
