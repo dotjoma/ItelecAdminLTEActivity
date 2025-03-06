@@ -1,8 +1,8 @@
 <?php
     require_once("connect.php");
 
-    $title = $_GET["txtTitle"];
-    $content = $_GET["txtContent"];
+    $title = $_POST["txtTitle"];
+    $content = $_POST["txtContent"];
     echo "{$title} - {$content}";
 
     try {
