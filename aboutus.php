@@ -1,5 +1,26 @@
 <?php
     require_once("includes/connect.php");
+
+    $strId = 0;
+    $strTitle = "";
+    $strContent = "";
+
+    if (isset($_GET["editid"]))
+    {   
+        try {
+            $id = $_GET["editid"];
+            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
+            $stmtLoad = $con->prepare($sqlLoad);
+            $dataLoad = array($id);
+            $stmtLoad->execute($dataLoad);
+            $rowLoad = $stmtLoad->fetch();
+            $strId = $rowLoad[0];
+            $strTitle = $rowLoad[1];
+            $strContent = $rowLoad[2];
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +60,7 @@
                                 <!-- <div class="mt-2">                               
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i class="fas fa-plus me-1"></i>
-                                    Add New Record
+                                        Add New Record
                                     </button>
                                 </div> -->
                                 
@@ -63,14 +84,14 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
+                                            <!-- <tfoot>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Title</th>
                                                     <th>Content</th>
                                                     <th>Action</th>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot> -->
                                             <tbody>
                                                 <?php
                                                     $sql = "SELECT * FROM aboutus";
@@ -82,13 +103,45 @@
                                                         $tblAbout.="<tr>";
                                                         $tblAbout.="<td>{$row[0]}</td>";
                                                         $tblAbout.="<td>{$row[1]}</td>";
-                                                        $content=substr(nl2br($row[2]),0,300)."...<button type='button' class='' data-bs-toggle='modal' data-bs-target='#exampleModal' data-bs-whatever='@mdo'>Read More</button>";
+                                                        $content=substr(nl2br($row[2]),0,300);
                                                         $tblAbout.="<td>$content</td>";
-                                                        $tblAbout.="<td>
-                                                            <button class='btn btn-primary'><i class='fa-solid fa-magnifying-glass'></i></button>
-                                                            <button class='btn btn-warning'><i class='fa-solid fa-pen-to-square'></i></button>
-                                                            <button class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
-                                                        </td>";
+
+                                                        $strViewButton="<button class='btn btn-primary'>
+                                                            <a class='text-light' href='includes/process_about.php?viewid={$row[0]}'>
+                                                                <i class='fa-solid fa-magnifying-glass'></i>
+                                                            </a>
+                                                            </button>";
+
+                                                        // $strViewButton="<button type='butto' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
+                                                        // <a class='text-light' href='aboutus.php?viewid={$row[0]}'>
+                                                        //         <i class='fa-solid fa-magnifying-glass'></i>
+                                                        //     </a>
+                                                        // </button>";
+
+                                                        $strEditButton="<button class='btn btn-warning'>
+                                                            <a class='text-light' href='aboutus.php?editid={$row[0]}'>
+                                                                <i class='fa-solid fa-pen-to-square'></i>
+                                                            </a>
+                                                            </button>";
+
+                                                        $strDelButton="<button class='btn btn-danger'>
+                                                            <a class='text-light' href='includes/process_about.php?delid={$row[0]}'>
+                                                                <i class='fa-solid fa-trash'></i>
+                                                            </a>
+                                                            </button>";
+
+                                                        $tblAbout.="<td>{$strViewButton} {$strEditButton} {$strDelButton}</td>";
+
+                                                        // $tblAbout.="<td>
+                                                        //     <button class='btn btn-primary'><i class='fa-solid fa-magnifying-glass'>VIEW</i></button>
+                                                        //     <button class='btn btn-warning'><i class='fa-solid fa-pen-to-square'>UPDATE</i></button>
+                                                        //     <button class='btn btn-danger'>
+                                                        //     <a class='text-light' href='includes/process_about.php?delid={$row[0]}'>
+                                                        //         <i class='fa-solid fa-trash'>DELETE</i>
+                                                        //     </a>
+                                                        //     </button>
+                                                        // </td>";
+
                                                         $tblAbout.="</tr>";
                                                     }
                                                     echo $tblAbout;
@@ -102,13 +155,14 @@
                                         <h3>Data Entry</h3>
                                         <form action="includes/process_about.php" method="POST">
                                             <div class="mb-3">
+                                                <input type="hidden" name="txtId" id="txtId" value="<?=$strId?>">
                                                 <label for="txtTitle" class="form-label">Title:</label>
-                                                <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Enter title" required>
+                                                <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Enter title" value="<?=$strTitle?>" required>
                                             </div>
-
+                                            
                                             <div class="mb-3">
                                                 <label for="txtContent" class="form-label">Content:</label>
-                                                <textarea class="form-control" name="txtContent" id="txtContent" placeholder="Enter content" required></textarea>
+                                                <textarea class="form-control" name="txtContent" id="txtContent" placeholder="Enter content" required><?=$strContent?></textarea>
                                             </div>
 
                                             <button type="submit" class="btn btn-success">SUBMIT</button>
@@ -117,34 +171,23 @@
                                 </div>
                             </div>
 
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                    <div class="modal-header">  
-                                        <h5 class="modal-title" id="exampleModalLabel">Contents</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <?php
-                                        $sql = "SELECT atitle, acontent FROM aboutus WHERE aboutid = 1";
-                                        $stmt = $con->prepare($sql);
-                                        $stmt->execute();
-                                        $tblAbout="";
-                                        while($row=$stmt->fetch())
-                                        {
-                                            $tblAbout.="<tr>";
-                                            $tblAbout.="<td>{$row[0]}</td>";
-                                            $tblAbout.="<td>{$row[1]}</td>";
-                                            $tblAbout.="</tr>";
-                                        }
-                                        echo $tblAbout;
-                                    ?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                    </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
+                                    <p><?=$strContent?></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                                </div>
+                            </div>
                             </div>
                             
                         </div>
