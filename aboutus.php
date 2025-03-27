@@ -20,7 +20,7 @@
         } catch (PDOException $th) {
             echo $th->getMessage();
         }
-    }    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
