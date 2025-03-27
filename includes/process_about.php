@@ -59,6 +59,45 @@
         }
     }
 
+
+if (isset($_POST["txtTitle"])) {
+    $id = isset($_POST["txtId"]) ? $_POST["txtId"] : null;
+    $title = htmlspecialchars(trim($_POST["txtTitle"]));
+    $content = htmlspecialchars(trim($_POST["txtContent"]));
+
+    // Use proper sanitization
+    $title = filter_var($title, FILTER_SANITIZE_STRING);
+    $content = filter_var($content, FILTER_SANITIZE_STRING);
+
+    try {
+        if (!empty($id)) {
+            // **UPDATE existing record**
+            $sql = "UPDATE aboutus SET atitle=?, acontent=? WHERE aboutid=?";
+            $stmt = $con->prepare($sql);
+            $stmt->execute([$title, $content, $id]);
+        } else {
+            // **INSERT new record**
+            $sql = "INSERT INTO aboutus (atitle, acontent) VALUES(?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->execute([$title, $content]);
+        }
+        header("location: ../aboutus.php");
+        exit();
+    } catch (PDOException $th) {
+        echo $th->getMessage();
+    }
+}
+?>
+
+
+
+
+
+
+
+
+
+
     // if(isset($_POST["txtTitle"]))
     // {
     //     $title = htmlspecialchars(trim($_POST["txtTitle"]));
