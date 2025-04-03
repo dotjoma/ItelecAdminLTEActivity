@@ -9,31 +9,17 @@
     {   
         try {
             $id = $_GET["editid"];
-            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
+            $sqlLoad = "SELECT * FROM aboutus WHERE md5(aboutid)=?";
             $stmtLoad = $con->prepare($sqlLoad);
             $dataLoad = array($id);
             $stmtLoad->execute($dataLoad);
-            $rowLoad = $stmtLoad->fetch();
-            $strId = $rowLoad[0];
-            $strTitle = $rowLoad[1];
-            $strContent = $rowLoad[2];
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
-    }
-
-    if (isset($_GET["viewid"]))
-    {   
-        try {
-            $id = $_GET["viewid"];
-            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
-            $stmtLoad = $con->prepare($sqlLoad);
-            $dataLoad = array($id);
-            $stmtLoad->execute($dataLoad);
-            $rowLoad = $stmtLoad->fetch();
-            $strId = $rowLoad[0];
-            $strTitle = $rowLoad[1];
-            $strContent = $rowLoad[2];
+            if ( $stmtLoad->rowCount() != 0)
+            {
+                $rowLoad = $stmtLoad->fetch();
+                $strId = $rowLoad[0];
+                $strTitle = $rowLoad[1];
+                $strContent = $rowLoad[2];
+            }
         } catch (PDOException $th) {
             echo $th->getMessage();
         }
@@ -111,7 +97,7 @@
                                             </tfoot> -->
                                             <tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM aboutus";
+                                                    $sql = "SELECT aboutid, atitle, acontent, md5(aboutid) FROM aboutus";
                                                     $stmt = $con->prepare($sql);
                                                     $stmt->execute();
                                                     $tblAbout="";
@@ -120,44 +106,28 @@
                                                         $tblAbout.="<tr>";
                                                         $tblAbout.="<td>{$row[0]}</td>";
                                                         $tblAbout.="<td>{$row[1]}</td>";
-                                                        $content=substr(nl2br($row[2]),0,300);
+                                                        $content=substr(nl2br($row[2]),0,50) . "...";
                                                         $tblAbout.="<td>$content</td>";
 
                                                         $strViewButton="<button class='btn btn-primary'>
-                                                            <a class='text-light' href='includes/process_about.php?viewid={$row[0]}'>
+                                                            <a class='text-light' href='view.php?viewid={$row[3]}'>
                                                                 <i class='fa-solid fa-magnifying-glass'></i>
                                                             </a>
                                                             </button>";
 
-                                                        // $strViewButton="<button type='butto' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
-                                                        // <a class='text-light' href='aboutus.php?viewid={$row[0]}'>
-                                                        //         <i class='fa-solid fa-magnifying-glass'></i>
-                                                        //     </a>
-                                                        // </button>";
-
                                                         $strEditButton="<button class='btn btn-warning'>
-                                                            <a class='text-light' href='aboutus.php?editid={$row[0]}'>
+                                                            <a class='text-light' href='aboutus.php?editid={$row[3]}'>
                                                                 <i class='fa-solid fa-pen-to-square'></i>
                                                             </a>
                                                             </button>";
 
                                                         $strDelButton="<button class='btn btn-danger'>
-                                                            <a class='text-light' href='includes/process_about.php?delid={$row[0]}'>
+                                                            <a class='text-light' href='includes/process_about.php?delid={$row[3]}'>
                                                                 <i class='fa-solid fa-trash'></i>
                                                             </a>
                                                             </button>";
 
                                                         $tblAbout.="<td>{$strViewButton} {$strEditButton} {$strDelButton}</td>";
-
-                                                        // $tblAbout.="<td>
-                                                        //     <button class='btn btn-primary'><i class='fa-solid fa-magnifying-glass'>VIEW</i></button>
-                                                        //     <button class='btn btn-warning'><i class='fa-solid fa-pen-to-square'>UPDATE</i></button>
-                                                        //     <button class='btn btn-danger'>
-                                                        //     <a class='text-light' href='includes/process_about.php?delid={$row[0]}'>
-                                                        //         <i class='fa-solid fa-trash'>DELETE</i>
-                                                        //     </a>
-                                                        //     </button>
-                                                        // </td>";
 
                                                         $tblAbout.="</tr>";
                                                     }

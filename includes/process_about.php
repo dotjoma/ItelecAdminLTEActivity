@@ -12,15 +12,16 @@
         try {
             if (!empty($id)) {
                 $sql = "UPDATE aboutus SET atitle=?, acontent=? WHERE aboutid=?";
+                $data = array($title,$content,$id);
                 $stmt = $con->prepare($sql);
-                $stmt->execute([$title, $content, $id]);
+                $stmt->execute($data);
             } else {
-                $sql = "INSERT INTO aboutus (atitle, acontent) VALUES(?, ?)";
+                $sql = "INSERT INTO aboutus (atitle,acontent) VALUES(?,?)";
+                $data = array($title,$content);
                 $stmt = $con->prepare($sql);
-                $stmt->execute([$title, $content]);
+                $stmt->execute($data);
             }
             header("location: ../aboutus.php");
-            exit();
         } catch (PDOException $th) {
             echo $th->getMessage();
         }
@@ -28,7 +29,7 @@
 
     if(isset($_GET['delid']))
     {
-        $delSql = "DELETE FROM aboutus WHERE aboutid=?";
+        $delSql = "DELETE FROM aboutus WHERE md5(aboutid)=?";
         $data=array($_GET['delid']);
 
         try {
@@ -44,7 +45,7 @@
     {   
         try {
             $id = $_GET["viewid"];
-            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
+            $sqlLoad = "SELECT * FROM aboutus WHERE md5(aboutid)=?";
             $stmtLoad = $con->prepare($sqlLoad);
             $dataLoad = array($id);
             $stmtLoad->execute($dataLoad);
