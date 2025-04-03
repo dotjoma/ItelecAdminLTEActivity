@@ -40,4 +40,22 @@
         }
     }
 
+    if (isset($_GET["viewid"]))
+    {   
+        try {
+            $id = $_GET["viewid"];
+            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
+            $stmtLoad = $con->prepare($sqlLoad);
+            $dataLoad = array($id);
+            $stmtLoad->execute($dataLoad);
+            $rowLoad = $stmtLoad->fetch();
+            $strId = $rowLoad[0];
+            $strTitle = $rowLoad[1];
+            $strContent = $rowLoad[2];
+            echo $strTitle;
+            echo $strContent;
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
 ?>

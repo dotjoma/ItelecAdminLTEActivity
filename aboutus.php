@@ -21,6 +21,23 @@
             echo $th->getMessage();
         }
     }
+
+    if (isset($_GET["viewid"]))
+    {   
+        try {
+            $id = $_GET["viewid"];
+            $sqlLoad = "SELECT * FROM aboutus WHERE aboutid=?";
+            $stmtLoad = $con->prepare($sqlLoad);
+            $dataLoad = array($id);
+            $stmtLoad->execute($dataLoad);
+            $rowLoad = $stmtLoad->fetch();
+            $strId = $rowLoad[0];
+            $strTitle = $rowLoad[1];
+            $strContent = $rowLoad[2];
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,29 +187,26 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><?=$strContent?></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                            
                         </div>
                     </div>
-                    <?php require_once("includes/modal.php"); ?>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><?=$strContent?></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
                 <!-- Start of Footer -->
                 <?php require_once("includes/footer.php"); ?>
