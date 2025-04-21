@@ -36,7 +36,7 @@
             uploadFile($fileName,$newName,$upload_directory);
         }
 
-        // header(header: "location:../news.php");
+        header(header: "location:../news.php");
     }
 
     if (isset($_GET['delid'])) {
