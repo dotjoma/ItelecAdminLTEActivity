@@ -3,8 +3,7 @@
     function uploadFile($fileName,$newname,$upload_directory){
         if (is_uploaded_file(filename: $fileName['tmp_name'])){
             $fname=basename($fileName['name']);
-            $ext=explode(".",$fileName['name']);
-            $uploadFile=$upload_directory.$newname.".".end($ext);
+            $uploadFile=$upload_directory.$newname.".".end(explode(".",$fname));
             
             if(move_uploaded_file($fileName['tmp_name'],$uploadFile)){
                 $res = "File was successfully Upload";

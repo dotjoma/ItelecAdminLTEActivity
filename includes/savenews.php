@@ -36,14 +36,14 @@
         if(!(empty($fileName["name"]))){
             $upload_directory="../uploads/news/";
             uploadFile($fileName,$newName,$upload_directory);
-        }
 
-        $sqlUpdate="UPDATE news SET picture=? WHERE id=?";
-        $extName=end(explode(".",$fileName['name']));
-        $filename="{$newName}.{$extName}";
-        $dataUpdate=array($filename,$newName);
-        $stmpUpdate=$con->prepare($sqlUpdate);
-        $stmpUpdate->execute($dataUpdate);
+            $sqlUpdate="UPDATE news SET picture=? WHERE id=?";
+            $extName=end(explode(".",$fileName['name']));
+            $filename="{$newName}.{$extName}";
+            $dataUpdate=array($filename,$newName);
+            $stmpUpdate=$con->prepare($sqlUpdate);
+            $stmpUpdate->execute($dataUpdate);
+        }
 
         header(header: "location:../news.php");
     }

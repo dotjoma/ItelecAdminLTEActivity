@@ -18,12 +18,13 @@
             $stmtLoad->execute($dataLoad);
             if($stmtLoad->rowCount() != 0)
             {
-                $rowLoad = $stmtLoad->fetch();
-                $strId = $rowLoad[0];
-                $strTitle = $rowLoad[1];
-                $strAuthor = $rowLoad[2];
-                $strDatePosted = $rowLoad[3];
-                $strStory = $rowLoad[4];
+                $rowLoad=$stmtLoad->fetch();
+                $strId=$rowLoad[0];
+                $strTitle=$rowLoad[1];
+                $strAuthor=$rowLoad[2];
+                $strDatePosted=$rowLoad[3];
+                $strStory=$rowLoad[4];
+                $strPicture=$rowLoad[5];
             }
         } catch (PDOException $th) {
             echo $th->getMessage();
@@ -85,6 +86,7 @@
                                         <h1><?=$strTitle?></h1>
                                         <p><?=$strAuthor?></p>
                                         <p><?=$strDatePosted?></p>
+                                        <img src="./uploads/news/<?= $strPicture ?>" alt="news-image" height="100" width="100">
                                         <p><?=$strStory?></p>
                                     </div>
                                 </div>

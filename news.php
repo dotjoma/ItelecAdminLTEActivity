@@ -70,7 +70,7 @@
                                 <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="card-body">
-                                        <table id="datatablesSimple">
+                                        <table id="datatablesSimple" class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -92,13 +92,13 @@
                                                     {
                                                         $tblnews.="<tr>";
                                                         $tblnews.="<td>{$row[0]}</td>";
-                                                        $tblnews.="<td>".substr(nl2br($row[1]), 0, 50)."...</td>";
+                                                        $tblnews.="<td>{$row[1]}</td>";
                                                         $tblnews.="<td>{$row[2]}</td>";
                                                         $tblnews.="<td>{$row[3]}</td>";
-                                                        $tblnews .= "<td>" . substr(nl2br($row[4]), 0, 100) . "...</td>";
+                                                        $tblnews.="<td style='width: 100px;'>" . htmlspecialchars(substr($row[4], 0, 100)) . "...</td>";
 
                                                         $pic=strlen($row[5])==0? "nopic.png" : $row[5];
-                                                        $strPic="<img src='./uploads/news/{$pic}' height='50' width='50'";
+                                                        $strPic="<img src='./uploads/news/{$pic}' height='70' width='70'>";
 
                                                         $strViewButton = "<button class='btn btn-primary'>
                                                                 <a class='text-light' href='viewnews.php?viewid={$row[6]}'>
