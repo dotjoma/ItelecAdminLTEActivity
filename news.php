@@ -1,30 +1,30 @@
 <?php
-require_once("includes/connect.php");
+    require_once("includes/connect.php");
 
-$strId = 0;
-$strTitle = NULL;
-$strAuthor = NULL;
-$strdatePosted = NULL;
-$strstory = NULL;
+    $strId = 0;
+    $strTitle = NULL;
+    $strAuthor = NULL;
+    $strdatePosted = NULL;
+    $strstory = NULL;
 
-if (isset($_GET["editid"])) {
-    try {
-        $id = $_GET["editid"];
-        $sqlLoad = "SELECT * FROM news WHERE md5(id)=?";
-        $stmtLoad = $con->prepare($sqlLoad);
-        $stmtLoad->execute([$id]);
-        if ($stmtLoad->rowCount() != 0) {
-            $rowLoad = $stmtLoad->fetch();
-            $strId = $rowLoad[0];
-            $strTitle = $rowLoad[1];
-            $strAuthor = $rowLoad[2];
-            $strdatePosted = $rowLoad[3];
-            $strstory = $rowLoad[4]; 
+    if (isset($_GET["editid"])) {
+        try {
+            $id = $_GET["editid"];
+            $sqlLoad = "SELECT * FROM news WHERE md5(id)=?";
+            $stmtLoad = $con->prepare($sqlLoad);
+            $stmtLoad->execute([$id]);
+            if ($stmtLoad->rowCount() != 0) {
+                $rowLoad = $stmtLoad->fetch();
+                $strId = $rowLoad[0];
+                $strTitle = $rowLoad[1];
+                $strAuthor = $rowLoad[2];
+                $strdatePosted = $rowLoad[3];
+                $strstory = $rowLoad[4]; 
+            }
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
-    } catch (PDOException $th) {
-        echo $th->getMessage();
     }
-}
 ?>
 
 <!DOCTYPE html>

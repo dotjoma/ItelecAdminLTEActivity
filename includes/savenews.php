@@ -24,7 +24,7 @@
         if($id==0){
             $newName=$con->lastInsertId();
         }else{
-            $sqlPic="SELECT id FROM news WHERE md5(id)=?";
+            $sqlPic="SELECT id FROM news WHERE id=?";
             $dataPic=array($id);
             $stmtPic=$con->prepare($sqlPic);
             $stmtPic->execute($dataPic);
@@ -45,7 +45,7 @@
         $stmpUpdate=$con->prepare($sqlUpdate);
         $stmpUpdate->execute($dataUpdate);
 
-        // header(header: "location:../news.php");
+        header(header: "location:../news.php");
     }
 
     if (isset($_GET['delid'])) {
