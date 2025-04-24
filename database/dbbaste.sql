@@ -1,93 +1,55 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Apr 21, 2025 at 12:45 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `dbbaste`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `aboutus`
---
-
+/*
+SQLyog Ultimate v8.55 
+MySQL - 5.0.45-community-nt : Database - dbbaste
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbbaste` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `dbbaste`;
+
+/*Table structure for table `aboutus` */
+
+DROP TABLE IF EXISTS `aboutus`;
+
 CREATE TABLE `aboutus` (
-  `aboutid` int(11) NOT NULL,
+  `aboutid` int(11) unsigned NOT NULL auto_increment,
   `atitle` varchar(255) NOT NULL,
-  `acontent` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `news`
---
-
+  `acontent` text,
+  PRIMARY KEY  (`aboutid`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+/*Data for the table `aboutus` */
+
+insert  into `aboutus`(`aboutid`,`atitle`,`acontent`) values (22,'Wheredoesitcomefrom?','Contrarytopopularbelief,LoremIpsumisnotsimplyrandomtext.IthasrootsinapieceofclassicalLatinliteraturefrom45BC,makingitover2000yearsold.RichardMcClintock,aLatinprofessoratHampden-SydneyCollegeinVirginia,lookeduponeofthemoreobscureLatinwords,consectetur,fromaLoremIpsumpassage,andgoingthroughthecitesofthewordinclassicalliterature,discoveredtheundoubtablesource.LoremIpsumcomesfromsections1.10.32and1.10.33of&quot;deFinibusBonorumetMalorum&quot;(TheExtremesofGoodandEvil)byCicero,writtenin45BC.Thisbookisatreatiseonthetheoryofethics,verypopularduringtheRenaissance.ThefirstlineofLoremIpsum,&quot;Loremipsumdolorsitamet..&quot;,comesfromalineinsection1.10.32.ThestandardchunkofLoremIpsumusedsincethe1500sisreproducedbelowforthoseinterested.Sections1.10.32and1.10.33from&quot;deFinibusBonorumetMalorum&quot;byCiceroarealsoreproducedintheirexactoriginalform,accompaniedbyEnglishversionsfromthe1914translationbyH.Rackham.'),(23,'WherecanIgetsome?','TherearemanyvariationsofpassagesofLoremIpsumavailable,butthemajorityhavesufferedalterationinsomeform,byinjectedhumour,orrandomisedwordswhichdon&#039;tlookevenslightlybelievable.IfyouaregoingtouseapassageofLoremIpsum,youneedtobesurethereisn&#039;tanythingembarrassinghiddeninthemiddleoftext.AlltheLoremIpsumgeneratorsontheInternettendtorepeatpredefinedchunksasnecessary,makingthisthefirsttruegeneratorontheInternet.Itusesadictionaryofover200Latinwords,combinedwithahandfulofmodelsentencestructures,togenerateLoremIpsumwhichlooksreasonable.ThegeneratedLoremIpsumisthereforealwaysfreefromrepetition,injectedhumour,ornon-characteristicwordsetc.'),(24,'Nequeporroquisquame','Loremipsumdolorsitamet,consecteturadipiscingelit.Nullalaoreetsemleo,necscelerisquenequelobortiseu.Maecenashendreritdiamdictumcommodomollis.Insitametcursusquam,sedsuscipitmassa.Namplaceratdapibusex.Utefficiturodioaleoaliquam,nonvenenatisquamtempor.Phasellusataccumsanturpis.Phasellusfaucibuselementumliberoquistincidunt.Pellentesquesempererateuinterdumaliquam.Vivamusatconsequatjusto,ingravidamagna.Namsedvelitposuerenisilaoreetfringillaidvelante.Sedeujustosemper,posueremagnavel,scelerisqueante.Inhachabitasseplateadictumst.Phasellussitametpurusaloremlobortisullamcorper.Pellentesquevelpellentesquenibh,sitametaccumsanmauris.Duiseratenim,imperdietcongueegestastempor,lobortisinlorem.Nullanonnuncdapibus,molestieexnon,hendreritmauris.Nuncegetsagittislorem,utlobortisdolor.Vivamussitametsemperjusto.Fusceconguemagnalectus,eupulvinarmagnafermentumet.Aliquamnoniaculiselit,acsodalesarcu.Proinaliquet,urnaquislacinialobortis,orcileotincidunterat,malesuadasemperenimenimcondimentumvelit.Pellentesquetristiqueidsapiennonvarius.Utplaceratliberoelit,acfermentumnunctempussed.Aeneanaliquet,urnaetvolutpatfringilla,quamlacusmalesuadanisi,etmattisarcupurusapurus.Vestibulumsollicitudinmolestieneque,utsemperdiammattisid.Praesentporttitorodioeuauctoregestas.Aeneansedauctorligula.Donecfinibusplaceratnunc,nonpharetrametusinterdumeu.Aeneantristiqueegetmagnanecbibendum.Nuncacleositametdolorpharetrafacilisisacajusto.Nullaconvallisornaremassa,utrutrumexinterdumfaucibus.Duistortorsapien,bibendumvitaeturpissitamet,aliquetultriciesest.Vivamuseleifendinterdumtincidunt.Infeugiatdolorsedligulavariushendreritidsedurna.Inegestasegestascursus.Ineuismodpurusarcu,infinibusurnavulputatevitae.Insitametdapibuslacus.Phasellusportavitaenibhnecvolutpat.Praesentlaoreeteratetnisitempor,bibendumvariusurnasuscipit.Maecenassedligulapellentesque,tristiqueestnon,rutrumnulla.Proinarcuorci,egestassedtempusa,vestibulumsitametaugue.Integerfeugiat,elitvitaemollisinterdum,nuncvelitauctornunc,egetmollisantequamquisdiam.Phasellusinlacinialigula.Aliquamvitaemaurispretium,pretiumipsumtempus,sagittisdiam.Pellentesquefeugiateterateupellentesque.Donecauctoranteveljustovehiculasagittis.Pellentesquehabitantmorbitristiquesenectusetnetusetmalesuadafamesacturpisegestas.Suspendissedapibusimperdietmassaquisblandit.Integerconsequatfringillaantequisrhoncus.Sedlaoreetconguesollicitudin.Aliquamsitametnuncfinibus,pellentesqueligulaornare,elementumnulla.Crasvitaeestacenimcommodoauctoreuegetneque.Curabituridleotortor.Maurisinlectusultricies,tempusmetuseget,conguenisi.Vestibulumaquamaliquet,ullamcorperjustout,tristiquelacus.Quisquerutrumfeugiatnequeegetegestas.Fusceateniminrisusviverraaliquamidveleros.Vestibulumcursusnislinmollistempor.Vestibulumhendreritetmagnasedultrices.Donecpharetraeunibhnecpellentesque.Nuncinquamutleosodalesposuereutnonrisus.Nuncegetplaceratfelis,vitaelaoreetipsum.Invitaeurnaluctus,fringillaturpiset,luctuserat.Praesentlobortis,leoutauctorvehicula,tortorjustopharetraodio,inauctornibhlorematlibero.Nuncnullarisus,elementumveltempusnec,vestibulumetlectus.Vestibulumsitametmalesuadalacus.Proinatrisusnonnuncfeugiatimperdietefficituraarcu.Crasinjustoauctor,mattisrisusac,scelerisquelorem.Donecidplaceratsem,egetconsecteturorci.Praesentaccumsanvenenatislaoreet.Etiamfermentumeratatvariusmattis.Nullamiaculisnislacnunctristique,atsempersemcommodo.Fusceidvulputatemassa.Quisquecondimentuminterdumnibhquissollicitudin.Inhachabitasseplateadictumst.Sedsedaugueportaleoimperdiethendreritnonacurna.Praesentnecturpisnonerosrutrumimperdietetetmetus.Nullaatluctusorci,nonaliquamex.Aliquamrhoncusetjustonecgravida.Suspendissepotenti.Quisqueconvallisporttitorvestibulum.Aeneanegetliberofermentum,iaculisligulaefficitur,efficiturtortor.Donecsitametmaximuslorem,vitaelaoreetneque.Inhachabitasseplateadictumst.Nullamamattisarcu.Utatfermentumorci,quisaccumsantellus.Utacjustolorem.Integerluctuslacusveldolorbibendum,eulaoreetsemtincidunt.Crasutvestibulumsapien.Vestibulumviverracommodovestibulum.Duiseteratetnislfermentumbibendum.Curabiturconvallisipsumlorem,rutrumscelerisqueipsumimperdieteget.Curabitureumattisipsum.Nuncnectellusrutrum,facilisisnibhac,egestastellus.Aeneaninfeugiatdui,seddictummassa.Etiamsemdiam,ullamcorpersedmassaut,placeratrutrumlorem.Inmolliserosacauctorplacerat.Vestibulumanteipsumprimisinfaucibusorciluctusetultricesposuerecubiliacurae;Phaselluseuismoderosegetturpisauctorlacinia.Loremipsumdolorsitamet,consecteturadipiscingelit.Nuncvelcongueligula.Nullaportametusvelsapienrutrum,vitaeullamcorpernullasagittis.Curabiturpellentesqueurnavelipsumpulvinar,asuscipitleotempus.Donecuttellusnecliberopretiumgravida.Aeneantinciduntnibhlacus,avolutpatnullapretiumeu.Aliquamegetodioaliquet,molestieliberoac,interdumnisl.Crasnonpellentesqueorci.Proinvehiculadolorfelis,ateuismodlectusiaculisnec.Aliquameratvolutpat.Aeneanegettortorvestibulum,pretiumorciet,tristiqueest.Nullasedquamidsapienrhoncusdictum.Aeneanfinibusnuncsitametloremfacilisis,velfeugiatelitsagittis.Vestibulumanteipsumprimisinfaucibusorciluctusetultricesposuerecubiliacurae;Praesentsitametexvitaeligularhoncusultrices.Maecenaseuelementumlectus.Vivamusestenim,pretiumidfeugiatvitae,volutpatsedante.Inhachabitasseplateadictumst.Nullafacilisi.Vivamusnecnibhetdolordictumvariusrutrumacleo.Nullamnecpretiumdiam.Quisqueeleifendsodalespretium.Classaptenttacitisociosquadlitoratorquentperconubianostra,perinceptoshimenaeos.Morbimattiseratdolor,etfinibusmagnaconvallissitamet.Curabituratsemavelitconguepellentesqueveleteros.Maurissitamettellusmolestie,aliquamenimvel,tinciduntodio.Donecdignissimloremgravida,placeraterossagittis,egestasmauris.Nullaornareposueremetusetsodales.Utsollicitudinsodaleslaoreet.Vivamusnonpurusex.Donecidestdiam.Integerlobortisquamacnuncvestibulum,inportamagnaviverra.Crasvenenatisestvelmielementumconsectetur.Aliquaminterdum,purusidsagittisvestibulum,nislnisiaccumsanmetus,accumsanrhoncuseratjustoacdui.Phasellusutimperdietquam.Sedpellentesqueidloremetporta.Donecrhoncusnullaeupharetrafeugiat.Curabiturvelrutrummassa,sitametornaremauris.Etiamcommodo,augueidpharetraefficitur,orciorcisodalesaugue,etconvallisodionullaeumetus.Aeneaneuconguetortor,sedullamcorperdiam.Integercongueimperdietmagna,eurutrumurnasempernec.Maecenasegetrhoncusnisl,acsagittismagna.Inlectusarcu,ornarepretiumestat,condimentumvariusnulla.Integermollisduivelit,necvehiculaeratiaculisa.Aeneansollicitudinegestasnunc,neccommodotelluscongueet.Phaselluslobortispellentesquetellusidcongue.Utsuscipitmattispurus.Nullamsitametliguladapibus,conguetellusat,luctuslorem.Suspendissetellusnisl,variustemporexnec,congueultricesmauris.Nullamfaucibusidelitveltincidunt.Pellentesquelaciniaorcileo.Vestibulumanteipsumprimisinfaucibusorciluctusetultricesposuerecubiliacurae;Aliquamquisenimmattis,iaculisdiameget,finibustellus.Fuscecursusplaceratmassaseddignissim.Donecnuncipsum,fermentumetmollisnon,gravidaquisturpis.Vivamusquislacusconsectetur,ullamcorperduivitae,auctoripsum.Vivamussedaliquameros,inelementumaugue.Duisnecullamcorperrisus.Quisquecursusaliquamsapien,sedconsecteturturpissemperid.Suspendisseidlectusodio.Maecenasconvallisnislsitametgravidasodales.Nuncmolestieeratdiam,utportaenimmaximusid.Nullavariusnonduietfinibus.Morbieublanditenim.Phasellusnonorciegetmipharetramattisidsitameturna.Maecenasquiselitinodiopretiumdictum.Fusceacquamnonnibhvestibulumgravida.Sedvitaehendreritdolor,sitamettinciduntlibero.Nullamutullamcorpermauris.Praesentcondimentumplaceratpurus,semperfeugiatipsum.Praesentaccumsanidipsumvelcommodo.Seddapibus,turpisporttitorpretiumaccumsan,leoerosimperdietex,laciniapharetranuncnisinecmauris.Etiamaccumsanconsecteturmauris.Integerfaucibusvelitutlectusvestibulumdapibus.Crasvenenatissapienidelitdignissimtincidunt.Fuscetristiquetinciduntlorem,atblanditestcongueeu.Etiamquisnequeidnisllaoreetcongueplaceratnecmetus.Nullaarculeo,malesuadaidsemvel,posueretristiqueodio.Vestibulumsitametexdapibus,consequatturpisin,fermentummassa.Donecplacerattemporlibero,dapibuseleifendmipretiumlobortis.Inelementumeleifendcursus.Sedtempusfringillaeuismod.Maecenasvehiculamiultriciesmetusegestas,ullamcorpermalesuadaturpispulvinar.Nuncloremerat,luctusuttristiquefringilla,porttitoradiam.Aliquamfringillaornareturpisetsuscipit.Nullasuscipitnuncvelduiluctusblandit.Nullaodiojusto,eleifendegetlaoreetet,scelerisquenonurna.Nullaconguenisiquisnislultricesiaculis.Quisqueultricesvestibulumjusto,vitaealiquamsemfeugiateget.Integersollicitudinodioneque,sedconvallisrisusgravidalaoreet.Duistempormiveldolorcursusbibendum.Sedtempornibheufelissollicitudin,egetlaciniaturpissuscipit.Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaapulvinarsem.Inplaceratluctuseleifend.Curabituretconvallissapien,atultriceslorem.Fuscevestibulumblanditeratquislobortis.Namfermentumaccumsanaugue,atsagittisvelitposueresitamet.Quisquevelfacilisiseros.Sedatrisussem.Duisvitaeexdui.Aliquameratvolutpat.Aliquamconsequateudiamsitametmollis.Praesentvitaecondimentumligula.Utornaretellusante,eumattisveliteuismodvitae.Crasrisusante,egestasultriciesleoeu,ullamcorperimperdieteros.Pellentesquemolestie,felisaconguevolutpat,odioduiluctusquam,quismalesuadatortorurnaattellus.Doneclaoreetdolorcursusauctorplacerat.Phasellussemperporttitorfacilisis.Fusceornareportaegestas.Aeneanauctoriaculisleo,noniaculisduieleifendbibendum.Morbisuscipiturnaatenimefficitur,aposueremagnafaucibus.Insodaleslobortisullamcorper.Vivamusatgravidanulla,etfaucibusnibh.Curabiturgravidamassaeuultriciesmattis.Phasellustinciduntiaculisdapibus.Maecenasindictumaugue.Etiamutlaoreetenim.Phaselluseutinciduntjusto,atfinibusturpis.Duistristiquesagittislacus,vellacinianibhpharetraquis.Donecpharetraegestasvelit,egetimperdietloremegestassitamet.Quisqueeratneque,finibusquisquamnon,interdumaccumsanlacus.Curabiturconvalliscondimentumloremacpellentesque.Donecsedquamutauguecondimentumportaatnonnibh.Donecaliquetexutmagnaeleifendefficitur.Quisquesodalesfacilisistincidunt.Vivamusnoncursusnisl,atlobortisfelis.Vivamusnunctellus,pretiumacrisussed,malesuadadapibusipsum.Donecultriciesvitaetellusafringilla.Curabiturfinibusaccumsansapienegetposuere.Interdumetmalesuadafamesacanteipsumprimisinfaucibus.Inurnafelis,rutrumneccongueat,ultriciessuscipitelit.Namidauctorest.Utvelmaurisfelis.Pellentesquehabitantmorbitristiquesenectusetnetusetmalesuadafamesacturpisegestas.'),(26,'Nequeporroquisquam','Loremipsumdolorsitamet,consecteturadipiscingelit.Nuncacduiseddolorconsequatvolutpataliquamegetmassa.Donecvestibulumnislideratdictum,rutrumiaculisquamaliquam.Inviverraurnasitametquamdapibus,utefficituranteullamcorper.Sednonsollicitudinlectus.Maecenasegetturpisconvallisestvolutpatbibenduminidnisi.Phasellusdapibus,nequeutportapretium,nibhmassarhoncusodio,idefficiturtellusdiamnonmauris.Integereuconvallistellus,attristiqueelit.Loremipsumdolorsitamet,consecteturadipiscingelit.Etiamvitaesemdictum,dapibusodiosed,mattissem.Namvitaevehiculalectus.Donecaquam.');
+
+/*Table structure for table `news` */
+
+DROP TABLE IF EXISTS `news`;
+
 CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  `date_posted` date DEFAULT NULL,
-  `story` text DEFAULT NULL,
-  `picture` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `news`
---
-
-INSERT INTO `news` (`id`, `title`, `author`, `date_posted`, `story`, `picture`) VALUES
-(4, 'Marcos eases Taiwan travel curbs for PH officials to boost investments', 'Darryl John Esguerra', '2025-04-21', 'MANILA – President Ferdinand R. Marcos Jr. has relaxed long-standing travel restrictions for Philippine government officials to Taiwan, aiming to maximize opportunities for the development and expansion of the country’s priority areas of investments.\r\n\r\nMarcos signed Memorandum Circular (MC) 32 on April 15, reducing the travel limitations that were first imposed under Executive Order (EO) 313 in 1989 during the administration of former president Corazon Aquino. A copy of the memorandum was made public on Monday.\r\n\r\nEO 313 had prohibited all Philippine government officials from undertaking official visits to Taiwan, receiving Taiwanese officials, or conducting any official activity related to Taiwan without clearance from the Department of Foreign Affairs (DFA).\r\n\r\nUnder the new policy, MC 32 limits travel restrictions to the President, Vice President, Secretary of Foreign Affairs, and Secretary of National Defense.\r\n\r\nGovernment officials intending to visit Taiwan for economic, trade and investment purposes are mandated to use their “ordinary passports and without using their official titles.”\r\n\r\nAdditionally, officials are required to inform and coordinate with the Manila Economic and Cultural Office (MECO), the Philippines’ de facto embassy in Taiwan, before their trip. The policy also enables Philippine officials to host Taiwanese delegations for economic talks, provided MECO is notified at least five days in advance.\r\n\r\nHowever, the circular maintains that no official agreements, memoranda of understanding, or similar documents can be signed with Taiwanese entities without prior approval from the DFA and, when necessary, the Office of the President. (PNA)', NULL);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `aboutus`
---
-ALTER TABLE `aboutus`
-  ADD PRIMARY KEY (`aboutid`);
-
---
--- Indexes for table `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `aboutus`
---
-ALTER TABLE `aboutus`
-  MODIFY `aboutid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `news`
---
-ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(128) NOT NULL,
+  `date_posted` date NOT NULL,
+  `story` text NOT NULL,
+  `picture` varchar(255) default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+/*Data for the table `news` */
+
+insert  into `news`(`id`,`title`,`author`,`date_posted`,`story`,`picture`) values (9,'edcas','zxcvzxcz','2025-04-24','asdasafasd','9.jpg'),(10,'edcas','zxcvzxcz','2025-04-24','asdasafasd','10.jpg'),(11,'dasdas','adasd','2025-04-24','dasdas','11.jpg'),(12,'test','test','2025-04-24','test','12.jpg'),(13,'test1','sadasd','2025-04-24','asdasdasd','13.jpg'),(14,'test2','test2','2025-04-24','test2','14.jpg');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
