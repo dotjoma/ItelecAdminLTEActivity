@@ -1,32 +1,30 @@
 <?php
-require_once("includes/connect.php");
+    require_once("includes/connect.php");
 
-$strId = 0;
-$strTitle = NULL;
-$strAuthor = NULL;
-$strdatePosted = NULL;
-$strstory = NULL;
+    $strId = 0;
+    $strTitle = "";
+    $strContent = "";
 
-if (isset($_GET["editid"])) {
-    try {
-        $id = $_GET["editid"];
-        $sqlLoad = "SELECT * FROM news WHERE md5(id)=?";
-        $stmtLoad = $con->prepare($sqlLoad);
-        $stmtLoad->execute([$id]);
-        if ($stmtLoad->rowCount() != 0) {
-            $rowLoad = $stmtLoad->fetch();
-            $strId = $rowLoad[0];
-            $strTitle = $rowLoad[1];
-            $strAuthor = $rowLoad[2];
-            $strdatePosted = $rowLoad[3];
-            $strstory = $rowLoad[4]; 
+    if (isset($_GET["editid"]))
+    {   
+        try {
+            $id = $_GET["editid"];
+            $sqlLoad = "SELECT * FROM aboutus WHERE md5(aboutid)=?";
+            $stmtLoad = $con->prepare($sqlLoad);
+            $dataLoad = array($id);
+            $stmtLoad->execute($dataLoad);
+            if ( $stmtLoad->rowCount() != 0)
+            {
+                $rowLoad = $stmtLoad->fetch();
+                $strId = $rowLoad[0];
+                $strTitle = $rowLoad[1];
+                $strContent = $rowLoad[2];
+            }
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
-    } catch (PDOException $th) {
-        echo $th->getMessage();
     }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,22 +43,32 @@ if (isset($_GET["editid"])) {
         <!-- Start of Header -->
         <?php require_once("includes/header.php"); ?>
         <!-- End of Header -->
+
         <div id="layoutSidenav">
             <!-- Start of Menu -->
             <?php require_once("includes/menu.php"); ?>
             <!-- End of Menu -->
+             
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">News</h1>
+                        <h1 class="mt-4">About Us</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><a href="blank.php">Dashboard</a> / News</li>
+                            <li class="breadcrumb-item active"><a href="blank.php">Dashboard</a> / About Us</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 Dashbord Records
+                                <!-- <div class="mt-2">                               
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <i class="fas fa-plus me-1"></i>
+                                        Add New Record
+                                    </button>
+                                </div> -->
+                                
                             </div>
+
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Records</button>
@@ -73,54 +81,57 @@ if (isset($_GET["editid"])) {
                                         <table id="datatablesSimple">
                                             <thead>
                                                 <tr>
-                                                    <th>Id</th>
+                                                    <th>ID</th>
                                                     <th>Title</th>
-                                                    <th>Author</th>
-                                                    <th>DatePosted</th>
-                                                    <th>Story</th>
-                                                    <th>Picture</th>
-                                                    <th>action</th>
+                                                    <th>Content</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <!-- <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Title</th>
+                                                    <th>Content</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot> -->
                                             <tbody>
                                                 <?php
-                                                    $sql = "SELECT id, title, author, date_posted, story, picture, md5(id) FROM news";
+                                                    $sql = "SELECT aboutid, atitle, acontent, md5(aboutid) FROM aboutus";
                                                     $stmt = $con->prepare($sql);
                                                     $stmt->execute();
-                                                    $tblnews="";
+                                                    $tblAbout="";
                                                     while($row=$stmt->fetch())
                                                     {
-                                                        $tblnews.="<tr>";
-                                                        $tblnews.="<td>{$row[0]}</td>";
-                                                        $tblnews.="<td>".substr(nl2br($row[1]), 0, 50)."...</td>";
-                                                        $tblnews.="<td>{$row[2]}</td>";
-                                                        $tblnews.="<td>{$row[3]}</td>";
-                                                        $tblnews .= "<td>" . substr(nl2br($row[4]), 0, 100) . "...</td>";
+                                                        $tblAbout.="<tr>";
+                                                        $tblAbout.="<td>{$row[0]}</td>";
+                                                        $tblAbout.="<td>{$row[1]}</td>";
+                                                        $content=substr(nl2br($row[2]),0,50) . "...";
+                                                        $tblAbout.="<td>$content</td>";
 
-                                                        $pic=strlen($row[5])==0? "nopic.png" : $row[5];
-                                                        $strPic="<img src='./uploads/news/{$pic}' height='50' width='50'";
-
-                                                        $strViewButton = "<button class='btn btn-primary'>
-                                                                <a class='text-light' href='viewnews.php?viewid={$row[6]}'>
-                                                                    <i class='fa-solid fa-eye'></i>
-                                                                </a>
+                                                        $strViewButton="<button class='btn btn-primary'>
+                                                            <a class='text-light' href='view.php?viewid={$row[3]}'>
+                                                                <i class='fa-solid fa-magnifying-glass'></i>
+                                                            </a>
                                                             </button>";
+
                                                         $strEditButton="<button class='btn btn-warning'>
-                                                                <a class='text-light' href='news.php?editid={$row[6]}'>
-                                                                    <i class='fa-solid fa-pen-to-square'></i>
-                                                                </a>
+                                                            <a class='text-light' href='aboutus.php?editid={$row[3]}'>
+                                                                <i class='fa-solid fa-pen-to-square'></i>
+                                                            </a>
                                                             </button>";
-                                                        $strDelButton = "<button class='btn btn-danger'>
-                                                            <a class='text-light' href='includes/savenews.php?delid={$row[6]}'>
+
+                                                        $strDelButton="<button class='btn btn-danger'>
+                                                            <a class='text-light' href='includes/process_about.php?delid={$row[3]}'>
                                                                 <i class='fa-solid fa-trash'></i>
                                                             </a>
-                                                        </button>";
+                                                            </button>";
 
-                                                        $tblnews.="<td>{$strPic}</td>";
-                                                        $tblnews.="<td>{$strViewButton} {$strEditButton} {$strDelButton}</td>";
-                                                        $tblnews.="</tr>";
+                                                        $tblAbout.="<td>{$strViewButton} {$strEditButton} {$strDelButton}</td>";
+
+                                                        $tblAbout.="</tr>";
                                                     }
-                                                    echo $tblnews;
+                                                    echo $tblAbout;
                                                 ?>
                                             </tbody>
                                         </table>
@@ -129,30 +140,18 @@ if (isset($_GET["editid"])) {
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                     <div class="p-3">
                                         <h3>Data Entry</h3>
-                                        <form action="includes/savenews.php" method="POST" enctype="multipart/form-data">
+                                        <form action="includes/process_about.php" method="POST">
                                             <div class="mb-3">
                                                 <input type="hidden" name="txtId" id="txtId" value="<?=$strId?>">
-                                                <label for="txtTitle" class="form-label">Title :</label>
-                                                <input type="text" class="form-control" name="txtTitle" value='<?= $strTitle ?>' />
+                                                <label for="txtTitle" class="form-label">Title:</label>
+                                                <input type="text" class="form-control" name="txtTitle" id="txtTitle" placeholder="Enter title" value="<?=$strTitle?>" required>
                                             </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <label for="txtAuthor" class="form-label">Author :</label>
-                                                    <input type="text" class="form-control" name="txtAuthor" value='<?= $strAuthor ?>' />
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="dtDate" class="form-label">Date Posted :</label>
-                                                    <input type="date" class="form-control" name="dtDate" value='<?= $strdatePosted ?>' />
-                                                </div>
-                                            </div>
+                                            
                                             <div class="mb-3">
-                                                <label for="story" class="form-label">Story :</label>
-                                                <textarea class="form-control" id="txtStory" name="txtStory" rows="5" required><?= $strstory ?></textarea>
+                                                <label for="txtContent" class="form-label">Content:</label>
+                                                <textarea class="form-control" name="txtContent" id="txtContent" placeholder="Enter content" required><?=$strContent?></textarea>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="story" class="form-label">Image :</label>
-                                                <input type="file" name="picture" accept="image/*">
-                                            </div>
+
                                             <button type="submit" class="btn btn-success">SUBMIT</button>
                                         </form>
                                     </div>

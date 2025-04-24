@@ -96,9 +96,10 @@ if (isset($_GET["editid"])) {
                                                         $tblnews.="<td>{$row[2]}</td>";
                                                         $tblnews.="<td>{$row[3]}</td>";
                                                         $tblnews .= "<td>" . substr(nl2br($row[4]), 0, 100) . "...</td>";
-
-                                                        $pic=strlen($row[5])==0? "nopic.png" : $row[5];
-                                                        $strPic="<img src='./uploads/news/{$pic}' height='50' width='50'";
+                                                        $tblnews.="<td>{$row[5]}</td>";
+                                                    
+                                                        // $pic=strlen($row[5]==0?"nopic.png": $row[5]);
+                                                        // $strPic="<img src='./uploads/news/{$pic}' height='50' width='50' alt='' srcset=''>";
 
                                                         $strViewButton = "<button class='btn btn-primary'>
                                                                 <a class='text-light' href='viewnews.php?viewid={$row[6]}'>
@@ -116,7 +117,6 @@ if (isset($_GET["editid"])) {
                                                             </a>
                                                         </button>";
 
-                                                        $tblnews.="<td>{$strPic}</td>";
                                                         $tblnews.="<td>{$strViewButton} {$strEditButton} {$strDelButton}</td>";
                                                         $tblnews.="</tr>";
                                                     }
